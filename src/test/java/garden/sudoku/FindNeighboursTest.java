@@ -64,42 +64,42 @@ public class FindNeighboursTest {
 		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
 	}
 	
+	@Test
+	public void fillBedOfSize4WithPlantsUnordered() {
+		givenAGardenBedOfSize(4);
+		String[] plantsListString = {"A likes B", "D likes X", "C likes D", "B likes C"};
+		doArragePlantsThatLikeEachOther(plantsListString);
+		String[] expectedGardenBed = {"A", "B", "C", "D"};
+		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
+	}
+	
 	private void givenAGardenBedOfSize(int size) {
 		gardenBed = new String[size];
 	}
 
+	/*
+	 * Set the first element in the list as the first plant in the garden.
+	 * Then find the first liked neighbour and set it as the next plant in the garden.
+	 * For this neighbour continue with it's liked neighbours.
+	 */
 	private void doArragePlantsThatLikeEachOther(String[] plantsListString) {
-		List<Plant> plantList = getPlantListFromString(plantsListString);
-		Plant firstPlant = plantList.get(0);
-		gardenBed[0] = firstPlant.getName();
-		List<String> likedNeighboursOfFirst = firstPlant.getLikedNeighbours();
-		if(gardenBed.length == 2) {
+		List<Plant> plantList = getPlantListFromString(plantsListString);	
+		
+		Plant actualPlant = plantList.get(0);
+		gardenBed[0] = actualPlant.getName();
+		for(int gardenBedIdenx = 1; gardenBedIdenx < gardenBed.length; gardenBedIdenx++) {
+			List<String> likedNeighboursOfPlant = actualPlant.getLikedNeighbours();
+			Plant nextPlant = null;
 			int count = 1;
-			while(gardenBed[1] == null) {
-				if(likedNeighboursOfFirst.contains(plantList.get(count).getName())) {
-					gardenBed[1] = plantList.get(count).getName();
+			while(gardenBed[gardenBedIdenx] == null) {
+				if(likedNeighboursOfPlant.contains(plantList.get(count).getName())) {
+					gardenBed[gardenBedIdenx] = plantList.get(count).getName();
+					nextPlant = plantList.get(count);
 				}
 				count++;
 			}
-		} if(gardenBed.length == 3) {
-			Plant secondPlant = null;
-			int count1 = 1;
-			while(gardenBed[1] == null) {
-				if(likedNeighboursOfFirst.contains(plantList.get(count1).getName())) {
-					gardenBed[1] = plantList.get(count1).getName();
-					secondPlant = plantList.get(count1);
-				}
-				count1++;
-			}
-			List<String> likedNeighboursOfSecond = secondPlant.getLikedNeighbours();
-			int count2 = 1;
-			while(gardenBed[2] == null) {
-				if(likedNeighboursOfSecond.contains(plantList.get(count2).getName())) {
-					gardenBed[2] = plantList.get(count2).getName();
-				}
-				count2++;
-			}
-		} 
+			actualPlant = nextPlant;
+		}
 	}
 
 	private List<Plant> getPlantListFromString(String[] plantsListString) {
