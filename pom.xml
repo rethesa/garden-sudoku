@@ -5,4 +5,12 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>garden-sudoku</name>
   <description>Find vegetables and herbs that complement each other for the best possible outcome of your garden.</description>
+  <dependencies>
+	  <dependency>
+	     <groupId>com.opencsv</groupId>
+	     <artifactId>opencsv</artifactId>
+	     <version>5.5</version>
+	  </dependency>
+  </dependencies>
+
 </project>
