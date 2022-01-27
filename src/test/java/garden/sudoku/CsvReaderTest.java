@@ -13,14 +13,11 @@ public class CsvReaderTest {
 	@Test
 	public void readCommaSeperatedValuesFromCsvTest() {
 		List<String[]> csvList = doReadCsvFromRelativPath("simplePlantList.csv");
-		String[] firstLine = {"Pflanzenname", "Gute Nachbarn"};
-		String[] secondLine = {"A", "B"};
-		String[] thirdLine = {"B", "A, C"};
 		
 		List<String[]> expectedCsvList = new ArrayList<String[]>();
-		expectedCsvList.add(firstLine);
-		expectedCsvList.add(secondLine);
-		expectedCsvList.add(thirdLine);
+		expectedCsvList.add(new String[] {"Pflanzenname", "Gute Nachbarn"});
+		expectedCsvList.add(new String[] {"A", "B"});
+		expectedCsvList.add(new String[] {"B", "A, C"});
 		
 		Assert.assertArrayEquals(expectedCsvList.toArray(), csvList.toArray());
 	}

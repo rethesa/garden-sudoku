@@ -19,9 +19,9 @@ public class CsvReader {
 		try {
 			Path absolutePath = Paths.get(ClassLoader.getSystemResource(filePath).toURI());
 			csvList = readCsvFromAbsolutePath(absolutePath);
-		} catch (URISyntaxException e1) {
+		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		} 
 		return csvList;
 	}
