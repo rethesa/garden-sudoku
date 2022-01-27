@@ -20,4 +20,9 @@ public class Vegetable implements Plant {
 		return likedNeighbours;
 	}
 
+	public String toString() {
+		String plantString = "name: " + this.name + " likes: " + this.likedNeighbours.toString();
+		return plantString;
+	}
+
 }

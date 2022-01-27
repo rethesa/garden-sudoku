@@ -8,8 +8,6 @@ import org.junit.Test;
 
 public class CsvReaderTest {
 	
-	List<Plant> plantList = new ArrayList<Plant>();
-	
 	@Test
 	public void readCommaSeperatedValuesFromCsvTest() {
 		List<String[]> csvList = doReadCsvFromRelativPath("simplePlantList.csv");

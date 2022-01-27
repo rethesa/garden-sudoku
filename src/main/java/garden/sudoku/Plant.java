@@ -8,5 +8,6 @@ public interface Plant {
 	
 	public List<String> getLikedNeighbours();
 	
+	public String toString();
 
 }
