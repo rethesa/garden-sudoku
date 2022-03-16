@@ -12,65 +12,51 @@ public class FindNeighboursTest {
 	
 	@Test
 	public void fillBedOfSize1WithFirstElement() {
-		givenAGardenBedOfSize(1);
-		String[] plantsListString = {"A likes X"};
-		doArragePlantsThatLikeEachOther(plantsListString);
-		String[] expectedGardenBed = {"A"};
-		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
+		givenAGardenBedOfSize(1);		
+		whenPlantsAreArraged(new String[] {"A likes X"});
+		thenGardenBedIs(new String[] {"A"});
 	}
 	
 	@Test
 	public void fillBedOfSize2WithPlantThatFirstOneLikes() {
 		givenAGardenBedOfSize(2);
-		String[] plantsListString = {"A likes B", "B likes X"};
-		doArragePlantsThatLikeEachOther(plantsListString);
-		String[] expectedGardenBed = {"A", "B"};
-		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
+		whenPlantsAreArraged(new String[] {"A likes B", "B likes X"});
+		thenGardenBedIs(new String[] {"A", "B"});
 	}
-	
+
 	@Test
 	public void fillBedOfSize2WithPlantThatFirstOneLikesButIsNotNext() {
 		givenAGardenBedOfSize(2);
-		String[] plantsListString = {"A likes C", "B likes X", "C likes X"};
-		doArragePlantsThatLikeEachOther(plantsListString);
-		String[] expectedGardenBed = {"A", "C"};
-		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
+		whenPlantsAreArraged(new String[] {"A likes C", "B likes X", "C likes X"});
+		thenGardenBedIs(new String[] {"A", "C"});
 	}
 	
 	@Test
 	public void fillBedOfSize2WithPlantThatFirstOneLikesButIsNotNextNext() {
 		givenAGardenBedOfSize(2);
-		String[] plantsListString = {"A likes D", "B likes X", "C likes X", "D likes X"};
-		doArragePlantsThatLikeEachOther(plantsListString);
-		String[] expectedGardenBed = {"A", "D"};
-		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
+		whenPlantsAreArraged(new String[] {"A likes D", "B likes X", "C likes X", "D likes X"});
+		thenGardenBedIs(new String[] {"A", "D"});	
 	}
 	
 	@Test
 	public void fillBedOfSize3WithPlantThatLikesTheNext() {
 		givenAGardenBedOfSize(3);
-		String[] plantsListString = {"A likes B", "B likes C", "C likes X"};
-		doArragePlantsThatLikeEachOther(plantsListString);
-		String[] expectedGardenBed = {"A", "B", "C"};
-		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
+		whenPlantsAreArraged(new String[] {"A likes B", "B likes C", "C likes X"});
+		thenGardenBedIs(new String[] {"A", "B", "C"});
 	}
 	
 	@Test
 	public void fillBedOfSize3WithPlantsUnordered() {
 		givenAGardenBedOfSize(3);
-		String[] plantsListString = {"A likes B", "C likes X", "B likes C"};
-		doArragePlantsThatLikeEachOther(plantsListString);
-		String[] expectedGardenBed = {"A", "B", "C"};
-		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
+		whenPlantsAreArraged(new String[] {"A likes B", "C likes X", "B likes C"});
+		thenGardenBedIs(new String[] {"A", "B", "C"});
 	}
 	
 	@Test
 	public void fillBedOfSize4WithPlantsUnordered() {
 		givenAGardenBedOfSize(4);
-		String[] plantsListString = {"A likes B", "D likes X", "C likes D", "B likes C"};
-		doArragePlantsThatLikeEachOther(plantsListString);
-		String[] expectedGardenBed = {"A", "B", "C", "D"};
-		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
+		whenPlantsAreArraged(new String[] {"A likes B", "D likes X", "C likes D", "B likes C"});
+		thenGardenBedIs(new String[] {"A", "B", "C", "D"});
 	}
 	
 	private void givenAGardenBedOfSize(int size) {
@@ -82,7 +68,7 @@ public class FindNeighboursTest {
 	 * Then find the first liked neighbour and set it as the next plant in the garden.
 	 * For this neighbour continue with it's liked neighbours.
 	 */
-	private void doArragePlantsThatLikeEachOther(String[] plantsListString) {
+	private void whenPlantsAreArraged(String[] plantsListString) {
 		List<Plant> plantList = getPlantListFromString(plantsListString);	
 		
 		Plant actualPlant = plantList.get(0);
@@ -112,6 +98,10 @@ public class FindNeighboursTest {
 			vegetableList.add(plant);
 		}
 		return vegetableList;
+	}
+	
+	private void thenGardenBedIs(String[] expectedGardenBed) {
+		Assert.assertArrayEquals(expectedGardenBed, gardenBed);
 	}
 	
 }

@@ -2,11 +2,11 @@ package garden.sudoku;
 
 import java.util.List;
 
-public class CsvPlantMapper {
+public class CsvToPlantMapper {
 
 	private List<String[]> csvToMap;
 
-	public CsvPlantMapper(String filePath) {
+	public CsvToPlantMapper(String filePath) {
 		// TODO Auto-generated constructor stub
 		
 		CsvReader csvReader = new CsvReader();
